@@ -71,7 +71,7 @@
 
                 <div class="form-group">
                     <div class="input-group date" data-date-format="dd/mm/yyyy">
-                        <input id="checkin" type="text" class="form-control" placeholder="Check in">
+                        <input id="checkin" type="text" class="form-control" placeholder="Check in" value="">
                         <div class="input-group-addon" >
                             <span class="glyphicon glyphicon-calendar"></span>
                         </div>
@@ -145,26 +145,26 @@
             <!-- ROOM 1 -->
             <div class="card clearfix pointer active">
                 <div class="room-image">
-                    <img src="images/cocos/room_1.png" width="100%" />
+                    <img id="photo" src="images/cocos/room_1.png" width="100%" />
                 </div>
 
                 <div class="room-content">
-                    <h5 class="form-group">Mini Dreamy Room</h5>
-                    <p class="form-group">Generous and comfortable these modern furnished rooms offer two queen-size beds and are on the first floor.</p>
+                    <h5 id="room" class="form-group">Mini Dreamy Room</h5>
+                    <p id="description" class="form-group">Generous and comfortable these modern furnished rooms offer two queen-size beds and are on the first floor.</p>
 
-                    <p class="form-group">Size: 25m2</p>
-
+                    <p>Size: <span id="size" class="form-group">25</span>m²</p>
+                    
                     <div class="room-info">
                         <div class="item">
                             <span class="inline-block">
                                 <img src="images/icons/double-bed.svg" width="40">
                             </span>
-                            <div>Beds: 1</div>
+                            <div>Beds: <span id="beds">1</span></div>
                         </div>
-                        <div class="item">People: 2</div>
+                        <div class="item">People: <span id="people">2</span></div>
                         <div class="item price text-right">
                             <span class="line-through">€400</span>
-                            €350
+                            €<span id="price">350</span>
                     </div>
                     </div>
                 </div>
@@ -237,7 +237,7 @@
             <div class="card">
                 <h2>Reservation Summary</h2>
                 <div class="clearfix">
-                    <h5 class="pull-left">Mini Dreamy Room</h5>
+                    <h5 id="room-summary" class="pull-left">Mini Dreamy Room</h5>
                     <div class="form-group pull-right">
                         <select class="pull-right" id="rooms">
                             <option>1</option>
@@ -272,8 +272,8 @@
 
                     <div class="card-content">
                         <p class="main">People</p>
-                        <p class="base" id="adults-summary">2 Adults</p>
-                        <p class="base" id="children-summary">2 Children</p>
+                        <p class="base"><span id="adults-summary">2</span> Adults</p>
+                        <p class="base"><span id="children-summary">2</span> Children</p>
                     </div>
 
                     <div class="card-checkout clearfix">
@@ -282,7 +282,7 @@
                             <p class="base"><a href="#">Price details ></a></p>
                         </div>
                         <div class="right pull-right">
-                            <p class="main">€350</p>
+                            <p class="main">€<span id="price-summary">350</span></p>
                         </div>
                     </div>
 
