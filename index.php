@@ -9,7 +9,7 @@
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
+    
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Arsenal:400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Dosis:400,700" rel="stylesheet">
@@ -71,7 +71,8 @@
 
                 <div class="form-group">
                     <div class="input-group date" data-date-format="dd/mm/yyyy">
-                        <input id="checkin" type="text" class="form-control" placeholder="Check in" value="">
+                        <input id="checkin" type="text" class="form-control" value="<?php
+                        echo date("d/m/Y");?>">
                         <div class="input-group-addon" >
                             <span class="glyphicon glyphicon-calendar"></span>
                         </div>
@@ -80,7 +81,8 @@
 
                 <div class="form-group">
                     <div class="input-group date" data-date-format="dd/mm/yyyy">
-                        <input id="checkout" type="text" class="form-control" placeholder="Checkout">
+                        <input id="checkout" type="text" class="form-control" value="<?php
+                        echo date("d/m/Y",strtotime("+1 day"));?>">
                         <div class="input-group-addon" >
                             <span class="glyphicon glyphicon-calendar"></span>
                         </div>
@@ -139,6 +141,9 @@
         </div>
         <div class="col-md-4 sidebar-header"></div>
     </div>
+
+    <div class="row" id="content"><!-- Here will the rooms --></div>
+
     <div class="row">
         <div class="col-md-8 main">
 
@@ -163,7 +168,7 @@
                         </div>
                         <div class="item">People: <span id="people">2</span></div>
                         <div class="item price text-right">
-                            <span class="line-through">€400</span>
+                            <span id="realPrice" class="line-through">€350</span>
                             €<span id="price">350</span>
                     </div>
                     </div>
@@ -172,7 +177,7 @@
             </div>
 
             <!-- ROOM 2 -->
-            <div class="card clearfix pointer">
+            <div id="card" class="card clearfix pointer">
                 <div class="room-image">
                     <img src="images/cocos/room_2.png" width="100%" />
                 </div>
@@ -279,14 +284,15 @@
                     <div class="card-checkout clearfix">
                         <div class="left pull-left">
                             <p class="main">Total</p>
-                            <p class="base"><a href="#">Price details ></a></p>
+                            <p id="priceDetails" class="base"><a class="pointer">Price details ></a></p><br>
+                            <input type="text" class="form-control" placeholder="Your promo_code">
                         </div>
                         <div class="right pull-right">
                             <p class="main">€<span id="price-summary">350</span></p>
                         </div>
                     </div>
 
-                    <a href="#" class="btn btn-primary btn-group-justified">
+                    <a href="./views/pages/payment.php" class="btn btn-primary btn-group-justified">
                         Save
                     </a>
                 </div>
@@ -332,6 +338,6 @@
 
 </footer>
 
-<script src="js/main.js"></script>
+<script src="./js/main.js"></script>
 </body>
 </html>
