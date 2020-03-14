@@ -16,6 +16,16 @@ function getInputs() {
   document.getElementById("checkout-summary").innerHTML = checkout;
   document.getElementById("adults-summary").innerHTML = adults;
   document.getElementById("children-summary").innerHTML = children;
+  
+  // Validations and logic of promo_code
+  if(adults == "" || children == "") {
+    alert('Please insert the quantity of people');  
+  };
+
+  if(adults == children && adults!=0 && children!=0) {
+    alert('Congratulations you have a promotional code!!!');
+    alert('XYZ70');
+  }
 }
 
 // GET data of JSON file with Ajax request
@@ -26,51 +36,59 @@ function showRooms() {
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       var myObj = JSON.parse(this.responseText);
-      content.innerHTML = `<div class="col-md-8 main">
-          <div id="card" class="card clearfix pointer active">
+      myObj.forEach(function(todo,i){
+      content.innerHTML += `<div class="col-md-8">
+          <div id="card" class="card clearfix pointer">
               <div class="room-image">
-                  <img id="photo" src="${myObj[8].photo}" width="100%" />
+                  <img id="photo" src="${todo.photo}" width="100%" />
               </div>
 
               <div class="room-content">
-                  <h5 id="room" class="form-group">${myObj[8].title}</h5>
-                  <p id="description" class="form-group">${myObj[8].body}</p>
+                  <h5 id="room" class="form-group">${todo.title}</h5>
+                  <p id="description" class="form-group">${todo.body}</p>
 
-                  <p>Size: <span id="size" class="form-group">${myObj[8].size}</span>m²</p>
+                  <p>Size: <span id="size" class="form-group">${todo.size}</span>m²</p>
                   
                   <div class="room-info">
                       <div class="item">
                           <span class="inline-block">
                               <img src="images/icons/double-bed.svg" width="40">
                           </span>
-                          <div>Beds: <span id="beds">${myObj[8].beds}</span></div>
+                          <div>Beds: <span id="beds">${todo.beds}</span></div>
                       </div>
-                      <div class="item">People: <span id="people">${myObj[8].people}</span></div>
+                      <div class="item">People: <span id="people">${todo.people}</span></div>
                       <div class="item price text-right">
                           <span class="line-through">€400</span>
-                          €<span id="price">${myObj[8].price}</span>
+                          €<span id="price">${todo.price}</span>
+                      </div>    
                   </div>
-                  </div>
-              </div>
+               </div>
+          </div>
+      </div>
 `
-    document.getElementById("room-summary").innerHTML = myObj[8].title;
-    document.getElementById("price-summary").innerHTML = myObj[8].price;
+      document.getElementById("summary").classList.remove("hidden");
+      document.getElementById("room-summary").innerHTML = todo.title;
+      document.getElementById("price-summary").innerHTML = todo.price;     
+});
     }
   };
   xhttp.open("GET", "../models/data.json", true);
   xhttp.send();
 }
 
-// Change Summary when click a card room
-var card = document.querySelector("#card");
+// Change summary and active card when select a room
+var card = document.querySelectorAll(".card");
 
-card.addEventListener("click", changeSummary);
-
-function changeSummary() {
+card.forEach(function(node, index){
+  node.addEventListener("click", function(){
     document.getElementById("room-summary").innerHTML = "TEST";
-    document.getElementById("price-summary").innerHTML = "TEST";
-    card.style.backgroundColor = "#e4f2f7";
-}
+    document.getElementById("price-summary").innerHTML = "TEST";  
+    
+    var current = document.getElementsByClassName("active");
+    current[0].className = current[0].className.replace(" active", "");
+    this.className += " active";
+    
+ })});
 
 // Use input quantity of rooms
 var rooms = document.getElementById("rooms");
@@ -109,6 +127,8 @@ function showDetails() {
   alert('Congratulations you have a promotional code!!!');
   alert('XYZ70');
 }
+
+
 
 
 
