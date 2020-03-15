@@ -1,12 +1,16 @@
-// GET button element in HTML DOM through of the id 
-var searchBtn = document.getElementById("searchBtn");
+// GET elements in HTML DOM through of the id 
+var btnSearch = document.getElementById('btnSearch');
+var summary = document.getElementById("summary");
+var roomSummary = document.getElementById("room-summary");
+var priceSummary = document.getElementById("price-summary");
+
 
 // Use method click to execute functions
-searchBtn.addEventListener("click", showRooms);
-searchBtn.addEventListener("click", getInputs);
+btnSearch.addEventListener("click", getInputs);
 
-// GET inputs values and change HTML elements
+// GET inputs values and change Summary
 function getInputs() {
+  event.preventDefault();
   var checkin = document.getElementById("checkin").value;
   var checkout = document.getElementById("checkout").value;
   var adults = document.getElementById("adults").value;
@@ -17,22 +21,23 @@ function getInputs() {
   document.getElementById("adults-summary").innerHTML = adults;
   document.getElementById("children-summary").innerHTML = children;
   
-  // Validations and logic of promo_code
-  if(adults == "" || children == "") {
-    alert('Please insert the quantity of people');  
+  // Validations 
+  if(adults == "") {
+    alert('Please insert the number of people');  
   };
 
-  if(adults == children && adults!=0 && children!=0) {
-    alert('Congratulations you have a promotional code!!!');
-    alert('XYZ70');
+  // Logic of promo_code (Number of adults equal number of children)
+  if(adults == children && adults != "") {
+    alert('Congratulations!!! You have a promotional code!!!');
+    alert('promo_code = XYZ70');
   }
 }
 
 // GET data of JSON file with Ajax request
-function showRooms() {
-  event.preventDefault(); 
+window.onload = function showRooms() {    
   var content = document.getElementById("content");
   var xhttp = new XMLHttpRequest();
+  
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       var myObj = JSON.parse(this.responseText);
@@ -64,17 +69,151 @@ function showRooms() {
                   </div>
                </div>
           </div>
-      </div>
-`
-      document.getElementById("summary").classList.remove("hidden");
-      document.getElementById("room-summary").innerHTML = todo.title;
-      document.getElementById("price-summary").innerHTML = todo.price;     
-});
-    }
+      </div>`
+      });
+      
+      
+      btnSearch.addEventListener('click', searchRooms);
+      
+      function searchRooms() {
+        event.preventDefault();
+        var adultsInpt = document.getElementById("adults").value;
+        var checkin = document.getElementById("checkin").value;
+        var dateSplit = checkin.split('/');
+
+        //var day = dateSplit[0]; 
+        var month = dateSplit[1]; 
+        //var year = dateSplit[2]; 
+        
+        // THE BEST ROOM FOR MORE THAN 4 ADULTS
+        if(adultsInpt >= "4") {
+        content.innerHTML = `<div class="col-md-8">
+        <div id="card" class="card clearfix pointer">
+            <div class="room-image">
+                <img id="photo" src="${myObj[2].photo}" width="100%" />
+            </div>
+
+            <div class="room-content">
+                <h5 id="room" class="form-group">${myObj[2].title}</h5>
+                <p id="description" class="form-group">${myObj[2].body}</p>
+
+                <p>Size: <span id="size" class="form-group">${myObj[2].size}</span>m²</p>
+                
+                <div class="room-info">
+                    <div class="item">
+                        <span class="inline-block">
+                            <img src="images/icons/double-bed.svg" width="40">
+                        </span>
+                        <div>Beds: <span id="beds">${myObj[2].beds}</span></div>
+                    </div>
+                    <div class="item">People: <span id="people">${myObj[2].people}</span></div>
+                    <div class="item price text-right">
+                        <span class="line-through">€400</span>
+                        €<span id="price">${myObj[2].price}</span>
+                    </div>    
+                </div>
+             </div>
+        </div>
+    </div>`
+        summary.classList.remove('hidden');
+        roomSummary.innerText = myObj[2].title;
+        priceSummary.innerText = myObj[2].price;
+        } 
+        
+        // JUST SIMPLE ROOM FOR 2 OR LESS ADULTS
+        if(adultsInpt <= "2" && adultsInpt != "") {
+          content.innerHTML = `<div class="col-md-8">
+          <div id="card" class="card clearfix pointer">
+              <div class="room-image">
+                  <img id="photo" src="${myObj[0].photo}" width="100%" />
+              </div>
+  
+              <div class="room-content">
+                  <h5 id="room" class="form-group">${myObj[0].title}</h5>
+                  <p id="description" class="form-group">${myObj[0].body}</p>
+  
+                  <p>Size: <span id="size" class="form-group">${myObj[0].size}</span>m²</p>
+                  
+                  <div class="room-info">
+                      <div class="item">
+                          <span class="inline-block">
+                              <img src="images/icons/double-bed.svg" width="40">
+                          </span>
+                          <div>Beds: <span id="beds">${myObj[0].beds}</span></div>
+                      </div>
+                      <div class="item">People: <span id="people">${myObj[0].people}</span></div>
+                      <div class="item price text-right">
+                          <span class="line-through">€400</span>
+                          €<span id="price">${myObj[0].price}</span>
+                      </div>    
+                  </div>
+               </div>
+          </div>
+      </div>`
+        summary.classList.remove('hidden');
+        roomSummary.innerText = myObj[0].title;
+        priceSummary.innerText = myObj[0].price;
+        } 
+        
+        // JUST BUNGALOW AVAILABLE FOR 3 ADULTS
+        if(adultsInpt == "3" && adultsInpt != "") {
+          content.innerHTML = `<div class="col-md-8">
+          <div id="card" class="card clearfix pointer">
+              <div class="room-image">
+                  <img id="photo" src="${myObj[1].photo}" width="100%" />
+              </div>
+  
+              <div class="room-content">
+                  <h5 id="room" class="form-group">${myObj[1].title}</h5>
+                  <p id="description" class="form-group">${myObj[1].body}</p>
+  
+                  <p>Size: <span id="size" class="form-group">${myObj[1].size}</span>m²</p>
+                  
+                  <div class="room-info">
+                      <div class="item">
+                          <span class="inline-block">
+                              <img src="images/icons/double-bed.svg" width="40">
+                          </span>
+                          <div>Beds: <span id="beds">${myObj[1].beds}</span></div>
+                      </div>
+                      <div class="item">People: <span id="people">${myObj[1].people}</span></div>
+                      <div class="item price text-right">
+                          <span class="line-through">€400</span>
+                          €<span id="price">${myObj[1].price}</span>
+                      </div>    
+                  </div>
+               </div>
+          </div>
+      </div>`
+        summary.classList.remove('hidden');
+        roomSummary.innerText = myObj[1].title;
+        priceSummary.innerText = myObj[1].price;
+        } 
+        
+        // NO ROOMS AVAILABLE IN APRIL
+        if(month == "04") {
+          alert('No more rooms!')
+          content.innerHTML = `<div class="col-md-8">
+          <div id="card" class="card clearfix pointer">
+              <div class="room-image">
+                  <img id="photo" src="images/cocos/norooms.png" width="100%" />
+              </div>
+  
+              <div class="room-content">
+                  <h5 id="room" class="form-group">No rooms available!</h5>
+                  <p id="description" class="form-group">Please choose another date.</p>
+              </div>
+          </div>
+      </div>`
+         summary.classList.add('hidden');
+        }
+      }
+    } 
   };
   xhttp.open("GET", "../models/data.json", true);
   xhttp.send();
-}
+};
+
 
 // Change summary and active card when select a room
 var card = document.querySelectorAll(".card");
@@ -109,7 +248,7 @@ console.log(document.URL);
 // Change CSS class of the price when use codePromo
 price = document.getElementById("price");
 
-price.addEventListener("click", codePromo);
+// price.addEventListener("click", codePromo);
 
 function codePromo() {
   realPrice = document.getElementById("realPrice");

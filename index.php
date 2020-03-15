@@ -94,7 +94,7 @@
 
 
                     <div class="form-group select-inline">
-                        <select class="form-control pointer" placeholder="Adults" id="adults">
+                        <select id="adults" class="form-control pointer" placeholder="Adults">
                             <option value="" selected>Adults</option>
                             <option value="1">Adults: 1</option>
                             <option value="2">Adults: 2</option>
@@ -108,7 +108,7 @@
                         </select>
                     </div>
                     <div class="form-group select-inline pointer">
-                        <select class="form-control pointer" placeholder="Children" id="children">
+                        <select id="children" class="form-control pointer" placeholder="Children">
                             <option value="" selected>Children</option>
                             <option value="1">Children: 1</option>
                             <option value="2">Children: 2</option>
@@ -124,7 +124,7 @@
 
 
                     <div class="form-group">
-                        <button id="searchBtn" class="btn btn-primary">Modify</button>
+                        <button id="btnSearch" class="btn btn-primary">Modify</button>
                     </div>
                     <div id="demo"></div>
                 </form>
@@ -146,7 +146,8 @@
         </div>
 
         <!-- Dynamically show rooms via JavaScript and Ajax  -->
-        <div class="row" id="content">
+        <div class="row">
+        <span id="content"></span>
 
 
             <!-- <div class="col-md-8 main"> -->
@@ -242,7 +243,7 @@
 
             <!-- SIDEBAR -->
             <div class="col-md-4 sidebar">
-                <div id="summary" class="card hidden">
+                <div id="summary" class="card">
                     <h2>Reservation Summary</h2>
                     <div class="clearfix">
                         <h5 id="room-summary" class="pull-left">Mini Dreamy Room</h5>
@@ -275,8 +276,10 @@
 
                         <div class="card-content">
                             <p class="main">Reservation date</p>
-                            <p class="base">From <strong><span id="checkin-summary">4/7/2018</span></strong> to <strong
-                                    id="checkout-summary">15/7/2018</strong></p>
+                            <p class="base">From <strong><span id="checkin-summary"><?php
+                        echo date("d/m/Y");?></span></strong> to <strong
+                                    id="checkout-summary"><?php
+                        echo date("d/m/Y",strtotime("+1 day"));?></strong></p>
                         </div>
 
                         <div class="card-content">
@@ -292,8 +295,8 @@
                                 <input type="text" class="form-control pointer" placeholder="Your promo_code">
                             </div>
                             <div class="right pull-right">
-                                <p class="main">€<span id="price-summary">350</span></p><br><br>
-                                <button class="right pull-right btn">Submit</button>
+                                <p class="main">€<span id="price-summary">400</span></p><br><br>
+                                <button class="right pull-right btn btn-success">Submit Code</button>
                             </div>
                         </div>
 
@@ -304,6 +307,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
 
