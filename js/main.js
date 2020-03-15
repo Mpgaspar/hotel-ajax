@@ -70,8 +70,38 @@ window.onload = function showRooms() {
                </div>
           </div>
       </div>`
-      });
+
+      // Change summary and active card when select a room
+      var card = document.querySelectorAll(".card");
+
+      card.forEach(function(node, index){
+      card[0].classList.add("active"); 
+      node.addEventListener("click", function(){
+      var current = document.getElementsByClassName("active");
+      current[0].className = current[0].className.replace(" active", "");
+      this.className += " active";
       
+      // HTML DOM Navigation
+      var nodePriceSummary = node.lastElementChild.lastElementChild.lastElementChild.lastElementChild.textContent;
+      var nodeRoomSummary = node.lastElementChild.firstElementChild.textContent;
+      
+      document.getElementById("room-summary").innerText = nodeRoomSummary ;
+      document.getElementById("price-summary").innerText = nodePriceSummary;
+
+      // Use number of rooms input
+      var rooms = document.getElementById("rooms");
+      rooms.addEventListener("click", numberRooms);
+
+      // GET number of rooms input and calculate the price
+      function numberRooms() {
+        var roomsqtd = document.getElementById("rooms").value;
+        var roomsValue = parseInt(roomsqtd);
+        var priceSummaryValue = parseInt(nodePriceSummary);
+        
+      document.getElementById("price-summary").innerHTML = priceSummaryValue * roomsValue;
+}
+ })});
+      });
       
       btnSearch.addEventListener('click', searchRooms);
       
@@ -88,7 +118,7 @@ window.onload = function showRooms() {
         // THE BEST ROOM FOR MORE THAN 4 ADULTS
         if(adultsInpt >= "4") {
         content.innerHTML = `<div class="col-md-8">
-        <div id="card" class="card clearfix pointer">
+        <div id="card" class="card clearfix pointer active">
             <div class="room-image">
                 <img id="photo" src="${myObj[2].photo}" width="100%" />
             </div>
@@ -123,7 +153,7 @@ window.onload = function showRooms() {
         // JUST SIMPLE ROOM FOR 2 OR LESS ADULTS
         if(adultsInpt <= "2" && adultsInpt != "") {
           content.innerHTML = `<div class="col-md-8">
-          <div id="card" class="card clearfix pointer">
+          <div id="card" class="card clearfix pointer active">
               <div class="room-image">
                   <img id="photo" src="${myObj[0].photo}" width="100%" />
               </div>
@@ -158,7 +188,7 @@ window.onload = function showRooms() {
         // JUST BUNGALOW AVAILABLE FOR 3 ADULTS
         if(adultsInpt == "3" && adultsInpt != "") {
           content.innerHTML = `<div class="col-md-8">
-          <div id="card" class="card clearfix pointer">
+          <div id="card" class="card clearfix pointer active">
               <div class="room-image">
                   <img id="photo" src="${myObj[1].photo}" width="100%" />
               </div>
@@ -194,7 +224,7 @@ window.onload = function showRooms() {
         if(month == "04") {
           alert('No more rooms!')
           content.innerHTML = `<div class="col-md-8">
-          <div id="card" class="card clearfix pointer">
+          <div id="card" class="card clearfix pointer active">
               <div class="room-image">
                   <img id="photo" src="images/cocos/norooms.png" width="100%" />
               </div>
@@ -215,26 +245,12 @@ window.onload = function showRooms() {
 };
 
 
-// Change summary and active card when select a room
-var card = document.querySelectorAll(".card");
-
-card.forEach(function(node, index){
-  node.addEventListener("click", function(){
-    document.getElementById("room-summary").innerHTML = "TEST";
-    document.getElementById("price-summary").innerHTML = "TEST";  
-    
-    var current = document.getElementsByClassName("active");
-    current[0].className = current[0].className.replace(" active", "");
-    this.className += " active";
-    
- })});
-
-// Use input quantity of rooms
+// Use number of rooms input
 var rooms = document.getElementById("rooms");
-rooms.addEventListener("click", quantityRooms);
+rooms.addEventListener("click", numberRooms);
 
 // GET number of rooms input and calculate the price
-function quantityRooms() {
+function numberRooms() {
   var rooms = document.getElementById("rooms").value;
   var priceSummary = document.getElementById("price-summary").innerText;
   var roomsValue = parseInt(rooms);
@@ -242,8 +258,6 @@ function quantityRooms() {
 
   document.getElementById("price-summary").innerHTML = priceSummaryValue * roomsValue;
 }
-
-console.log(document.URL);
 
 // Change CSS class of the price when use codePromo
 price = document.getElementById("price");

@@ -9,7 +9,8 @@
     <title>Los Cocos Bungalows</title>
 
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Arsenal:400,700" rel="stylesheet">
@@ -284,8 +285,8 @@
 
                         <div class="card-content">
                             <p class="main">People</p>
-                            <p class="base"><span id="adults-summary">2</span> Adults</p>
-                            <p class="base"><span id="children-summary">2</span> Children</p>
+                            <p class="base"><span id="adults-summary"></span> Adults</p>
+                            <p class="base"><span id="children-summary"></span> Children</p>
                         </div>
 
                         <div class="card-checkout clearfix">
