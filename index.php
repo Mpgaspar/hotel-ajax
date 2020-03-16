@@ -75,17 +75,17 @@
 
                     <div class="form-group">
                         <div class="input-group date pointer" data-date-format="dd/mm/yyyy">
-                            <input id="checkin" type="text" class="form-control pointer" value="<?php
+                            <input id="checkin" type="text" class="form-control" value="<?php
                         echo date("d/m/Y");?>">
-                            <div class="input-group-addon">
+                            <div class="input-group-addon pointer">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <div class="input-group date pointer" data-date-format="dd/mm/yyyy">
-                            <input id="checkout" type="text" class="form-control pointer" value="<?php
+                        <div class="input-group date" data-date-format="dd/mm/yyyy">
+                            <input id="checkout" type="text" class="form-control" value="<?php
                         echo date("d/m/Y",strtotime("+1 day"));?>">
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -249,16 +249,16 @@
                     <div class="clearfix">
                         <h5 id="room-summary" class="pull-left">Mini Dreamy Room</h5>
                         <div class="form-group pull-right">
-                            <select class="pull-right pointer" id="rooms">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
-                                <option>8</option>
-                                <option>9</option>
+                            <select id="rooms" class="pull-right pointer" >
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
                             </select>
                         </div>
                     </div>
@@ -293,11 +293,12 @@
                             <div class="left pull-left">
                                 <p class="main">Total</p>
                                 <p id="priceDetails" class="base"><a class="pointer">Price details ></a></p><br>
-                                <input type="text" class="form-control pointer" placeholder="Your promo_code">
+                                <input id= "inptPromoCode" type="text" class="form-control pointer" placeholder="Your promo_code">
                             </div>
                             <div class="right pull-right">
-                                <p class="main">€<span id="price-summary">400</span></p><br><br>
-                                <button class="right pull-right btn btn-success">Submit Code</button>
+                                
+                                <p class="main"><span id="realPrice" class="hidden">€</span> €<span id="price-summary">400</span></p><br><br>
+                                <button id="btnCode" class="right pull-right btn btn-success">Submit Code</button>
                             </div>
                         </div>
 
@@ -346,8 +347,11 @@
         </div>
 
     </footer>
-
-    <script src="./js/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/datepicker.js"></script>
 </body>
 
 </html>

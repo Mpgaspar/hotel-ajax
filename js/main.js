@@ -1,5 +1,6 @@
 // GET elements in HTML DOM through of the id 
 var btnSearch = document.getElementById('btnSearch');
+var btnCode = document.getElementById("btnCode");
 var summary = document.getElementById("summary");
 var roomSummary = document.getElementById("room-summary");
 var priceSummary = document.getElementById("price-summary");
@@ -23,10 +24,10 @@ function getInputs() {
   
   // Validations 
   if(adults == "") {
-    alert('Please insert the number of people');  
+    alert('Please insert the number of people.');  
   };
 
-  // Logic of promo_code (Number of adults equal number of children)
+  // How to get a promo_code (Number of adults equal number of children)
   if(adults == children && adults != "") {
     alert('Congratulations!!! You have a promotional code!!!');
     alert('promo_code = XYZ70');
@@ -85,6 +86,7 @@ window.onload = function showRooms() {
       var nodePriceSummary = node.lastElementChild.lastElementChild.lastElementChild.lastElementChild.textContent;
       var nodeRoomSummary = node.lastElementChild.firstElementChild.textContent;
       
+
       document.getElementById("room-summary").innerText = nodeRoomSummary ;
       document.getElementById("price-summary").innerText = nodePriceSummary;
 
@@ -94,11 +96,11 @@ window.onload = function showRooms() {
 
       // GET number of rooms input and calculate the price
       function numberRooms() {
-        var roomsqtd = document.getElementById("rooms").value;
-        var roomsValue = parseInt(roomsqtd);
+        var roomsqtd = rooms.value;
+        roomsValue = parseInt(roomsqtd);
         var priceSummaryValue = parseInt(nodePriceSummary);
         
-      document.getElementById("price-summary").innerHTML = priceSummaryValue * roomsValue;
+        priceSummary.innerHTML = priceSummaryValue * roomsValue;
 }
  })});
       });
@@ -115,6 +117,45 @@ window.onload = function showRooms() {
         var month = dateSplit[1]; 
         //var year = dateSplit[2]; 
         
+                // JUST SIMPLE ROOM FOR 2 OR LESS ADULTS
+                if(adultsInpt <= "2" && adultsInpt != "") {
+                    content.innerHTML = `<div class="col-md-8">
+                    <div id="card" class="card clearfix pointer active">
+                        <div class="room-image">
+                            <img id="photo" src="${myObj[0].photo}" width="100%" />
+                        </div>
+            
+                        <div class="room-content">
+                            <h5 id="room" class="form-group">${myObj[0].title}</h5>
+                            <p id="description" class="form-group">${myObj[0].body}</p>
+            
+                            <p>Size: <span id="size" class="form-group">${myObj[0].size}</span>m²</p>
+                            
+                            <div class="room-info">
+                                <div class="item">
+                                    <span class="inline-block">
+                                        <img src="images/icons/double-bed.svg" width="40">
+                                    </span>
+                                    <div>Beds: <span id="beds">${myObj[0].beds}</span></div>
+                                </div>
+                                <div class="item">People: <span id="people">${myObj[0].people}</span></div>
+                                <div class="item price text-right">
+                                    <span class="line-through">€400</span>
+                                    €<span id="price">${myObj[0].price}</span>
+                                </div>    
+                            </div>
+                         </div>
+                    </div>
+                </div>`
+                  roomSummary.innerText = myObj[0].title;
+                  priceSummary.innerText = myObj[0].price;
+                  summary.classList.remove('hidden');
+                  priceSummaryValue = parseInt(myObj[0].price);
+
+                  numberRooms();
+                  
+                  }
+
         // THE BEST ROOM FOR MORE THAN 4 ADULTS
         if(adultsInpt >= "4") {
         content.innerHTML = `<div class="col-md-8">
@@ -145,44 +186,10 @@ window.onload = function showRooms() {
              </div>
         </div>
     </div>`
+        priceSummaryValue = parseInt(myObj[2].price); 
         summary.classList.remove('hidden');
         roomSummary.innerText = myObj[2].title;
         priceSummary.innerText = myObj[2].price;
-        } 
-        
-        // JUST SIMPLE ROOM FOR 2 OR LESS ADULTS
-        if(adultsInpt <= "2" && adultsInpt != "") {
-          content.innerHTML = `<div class="col-md-8">
-          <div id="card" class="card clearfix pointer active">
-              <div class="room-image">
-                  <img id="photo" src="${myObj[0].photo}" width="100%" />
-              </div>
-  
-              <div class="room-content">
-                  <h5 id="room" class="form-group">${myObj[0].title}</h5>
-                  <p id="description" class="form-group">${myObj[0].body}</p>
-  
-                  <p>Size: <span id="size" class="form-group">${myObj[0].size}</span>m²</p>
-                  
-                  <div class="room-info">
-                      <div class="item">
-                          <span class="inline-block">
-                              <img src="images/icons/double-bed.svg" width="40">
-                          </span>
-                          <div>Beds: <span id="beds">${myObj[0].beds}</span></div>
-                      </div>
-                      <div class="item">People: <span id="people">${myObj[0].people}</span></div>
-                      <div class="item price text-right">
-                          <span class="line-through">€400</span>
-                          €<span id="price">${myObj[0].price}</span>
-                      </div>    
-                  </div>
-               </div>
-          </div>
-      </div>`
-        summary.classList.remove('hidden');
-        roomSummary.innerText = myObj[0].title;
-        priceSummary.innerText = myObj[0].price;
         } 
         
         // JUST BUNGALOW AVAILABLE FOR 3 ADULTS
@@ -215,9 +222,10 @@ window.onload = function showRooms() {
                </div>
           </div>
       </div>`
+        priceSummary.innerText = myObj[1].price;
+        priceSummaryValue = myObj[1].price;
         summary.classList.remove('hidden');
         roomSummary.innerText = myObj[1].title;
-        priceSummary.innerText = myObj[1].price;
         } 
         
         // NO ROOMS AVAILABLE IN APRIL
@@ -245,79 +253,43 @@ window.onload = function showRooms() {
 };
 
 
-// Use number of rooms input
-var rooms = document.getElementById("rooms");
-rooms.addEventListener("click", numberRooms);
-
-// GET number of rooms input and calculate the price
-function numberRooms() {
-  var rooms = document.getElementById("rooms").value;
-  var priceSummary = document.getElementById("price-summary").innerText;
-  var roomsValue = parseInt(rooms);
-  var priceSummaryValue = parseInt(priceSummary);
-
-  document.getElementById("price-summary").innerHTML = priceSummaryValue * roomsValue;
-}
-
-// Change CSS class of the price when use codePromo
-price = document.getElementById("price");
-
-// price.addEventListener("click", codePromo);
-
-function codePromo() {
-  realPrice = document.getElementById("realPrice");
-  realPrice.classList.replace("line-through","show-price");
-  document.getElementById("price").innerText = "200";
-}
-
-// Price Details
+// Logic of promo_code (promo_code = "XYZ70")
+var price = document.getElementById("price");
 var priceDetails = document.getElementById("priceDetails");
 
+btnCode.addEventListener("click", codePromo);
 priceDetails.addEventListener("click", showDetails);
 
+function codePromo() {  
+  var realPrice = document.getElementById("realPrice");
+  var inptPromoCode = document.getElementById("inptPromoCode").value;
+
+  var priceFloat = parseFloat(priceSummary.textContent);
+  
+  if(inptPromoCode == "") {
+      alert('Please insert your promo_code!');
+  } else if(inptPromoCode != "XYZ70") {
+      alert('Please insert a valid promo_code!');
+  }
+
+  if(inptPromoCode == "XYZ70") {
+    realPrice.innerText += priceSummary.textContent;
+    realPrice.classList.replace("hidden","show-price");  
+    priceSummary.innerText = priceFloat - (priceFloat * 0.7);
+    alert ("Press Save to pay!");
+    
+  }
+};
+
 function showDetails() {
-  event.preventDefault(); 
-  alert('Congratulations you have a promotional code!!!');
-  alert('XYZ70');
-}
+    var inptPromoCode = document.getElementById("inptPromoCode").value;
+    
+    if(inptPromoCode == "") {
+        alert(`€${priceSummary.textContent} is the total to be paid including taxes and fees.`);
+    } 
+    
+    if(inptPromoCode == "XYZ70") {
+        alert(`You got a 70% discount on ${realPrice.textContent}!`);
+    }
+};
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Another way to change the DOM
-// function showRooms() {
-//     var xhttp = new XMLHttpRequest();
-//         xhttp.onreadystatechange = function() {
-//           if (this.readyState == 4 && this.status == 200) {
-//             var myObj = JSON.parse(this.responseText);  
-//             document.getElementById("photo").src = myObj[8].photo;
-//             document.getElementById("room").innerHTML = myObj[8].title;
-//             document.getElementById("description").innerHTML = myObj[8].body;
-//             document.getElementById("size").innerHTML = myObj[8].size;
-//             document.getElementById("beds").innerHTML = myObj[8].beds;
-//             document.getElementById("people").innerHTML = myObj[8].people;
-//             document.getElementById("price").innerHTML = myObj[8].price;
-
-//             document.getElementById("room-summary").innerHTML = myObj[8].title;
-//             document.getElementById("price-summary").innerHTML = myObj[8].price;
-//           }
-//         };
-//         xhttp.open("GET", "../models/data.json", true);
-//         xhttp.send();
-// }
