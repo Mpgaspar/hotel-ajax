@@ -101,7 +101,7 @@ window.onload = function showRooms() {
         var priceSummaryValue = parseInt(nodePriceSummary);
         
         priceSummary.innerHTML = priceSummaryValue * roomsValue;
-}
+      }
  })});
       });
       
@@ -147,12 +147,20 @@ window.onload = function showRooms() {
                          </div>
                     </div>
                 </div>`
+                  summary.classList.remove('hidden');
                   roomSummary.innerText = myObj[0].title;
                   priceSummary.innerText = myObj[0].price;
-                  summary.classList.remove('hidden');
-                  priceSummaryValue = parseInt(myObj[0].price);
+                  
+                  var rooms = document.getElementById("rooms");
+                  rooms.addEventListener("click", numberRooms);
 
-                  numberRooms();
+                  function numberRooms() {
+                    var roomsqtd = rooms.value;
+                    roomsValue = parseInt(roomsqtd);
+                    var priceSummaryValue = parseInt(myObj[0].price);
+                    
+                    priceSummary.innerHTML = priceSummaryValue * roomsValue;
+                  }; 
                   
                   }
 
@@ -185,11 +193,21 @@ window.onload = function showRooms() {
                 </div>
              </div>
         </div>
-    </div>`
-        priceSummaryValue = parseInt(myObj[2].price); 
+    </div>` 
         summary.classList.remove('hidden');
         roomSummary.innerText = myObj[2].title;
         priceSummary.innerText = myObj[2].price;
+
+        var rooms = document.getElementById("rooms");
+                  rooms.addEventListener("click", numberRooms);
+
+                  function numberRooms() {
+                    var roomsqtd = rooms.value;
+                    roomsValue = parseInt(roomsqtd);
+                    var priceSummaryValue = parseInt(myObj[2].price);
+                    
+                    priceSummary.innerHTML = priceSummaryValue * roomsValue;
+                  }; 
         } 
         
         // JUST BUNGALOW AVAILABLE FOR 3 ADULTS
@@ -222,10 +240,20 @@ window.onload = function showRooms() {
                </div>
           </div>
       </div>`
-        priceSummary.innerText = myObj[1].price;
-        priceSummaryValue = myObj[1].price;
         summary.classList.remove('hidden');
+        priceSummary.innerText = myObj[1].price;
         roomSummary.innerText = myObj[1].title;
+
+        var rooms = document.getElementById("rooms");
+                  rooms.addEventListener("click", numberRooms);
+
+                  function numberRooms() {
+                    var roomsqtd = rooms.value;
+                    roomsValue = parseInt(roomsqtd);
+                    var priceSummaryValue = parseInt(myObj[1].price);
+                    
+                    priceSummary.innerHTML = priceSummaryValue * roomsValue;
+                  }; 
         } 
         
         // NO ROOMS AVAILABLE IN APRIL
