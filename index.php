@@ -65,7 +65,7 @@
         </div>
     </nav>
 
-
+    <div id="block">
     <div class="engine text-center">
 
         <div class="engine-wrapper">
@@ -127,9 +127,7 @@
                     <div class="form-group">
                         <button id="btnSearch" class="btn btn-primary">Modify</button>
                     </div>
-                    <div id="demo"></div>
                 </form>
-
             </div>
         </div>
     </div>
@@ -148,7 +146,7 @@
 
         <!-- Dynamically show rooms via JavaScript and Ajax  -->
         <div class="row">
-        <span id="content"></span>
+        <div id="content"></div>
 
 
             <!-- <div class="col-md-8 main"> -->
@@ -302,7 +300,7 @@
                             </div>
                         </div>
 
-                        <a href="./views/pages/payment.php" class="btn btn-primary btn-group-justified">
+                        <a id="btnSave" class="btn btn-primary btn-group-justified">
                             Save
                         </a>
                     </div>
@@ -311,7 +309,8 @@
         </div>
     </div>
     </div>
-
+    
+    </div>
 
 
     <footer class="footer">

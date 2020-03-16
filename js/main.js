@@ -1,6 +1,7 @@
-// GET elements in HTML DOM through of the id 
+// Use elements in HTML DOM through of the id 
 var btnSearch = document.getElementById('btnSearch');
 var btnCode = document.getElementById("btnCode");
+var btnSave = document.getElementById("btnSave");
 var summary = document.getElementById("summary");
 var roomSummary = document.getElementById("room-summary");
 var priceSummary = document.getElementById("price-summary");
@@ -9,7 +10,7 @@ var priceSummary = document.getElementById("price-summary");
 // Use method click to execute functions
 btnSearch.addEventListener("click", getInputs);
 
-// GET inputs values and change Summary
+// Use inputs values and change Summary
 function getInputs() {
   event.preventDefault();
   var checkin = document.getElementById("checkin").value;
@@ -86,17 +87,16 @@ window.onload = function showRooms() {
       var nodePriceSummary = node.lastElementChild.lastElementChild.lastElementChild.lastElementChild.textContent;
       var nodeRoomSummary = node.lastElementChild.firstElementChild.textContent;
       
-
       document.getElementById("room-summary").innerText = nodeRoomSummary ;
       document.getElementById("price-summary").innerText = nodePriceSummary;
 
       // Use number of rooms input
-      var rooms = document.getElementById("rooms");
+      rooms = document.getElementById("rooms");
       rooms.addEventListener("click", numberRooms);
 
-      // GET number of rooms input and calculate the price
+      // Number of rooms and calculate the price
       function numberRooms() {
-        var roomsqtd = rooms.value;
+        roomsqtd = rooms.value;
         roomsValue = parseInt(roomsqtd);
         var priceSummaryValue = parseInt(nodePriceSummary);
         
@@ -304,11 +304,11 @@ function codePromo() {
     realPrice.innerText += priceSummary.textContent;
     realPrice.classList.replace("hidden","show-price");  
     priceSummary.innerText = priceFloat - (priceFloat * 0.7);
-    alert ("Press Save to pay!");
-    
+    alert ("Press Save to pay!"); 
   }
 };
 
+// Show Price Details
 function showDetails() {
     var inptPromoCode = document.getElementById("inptPromoCode").value;
     
@@ -320,4 +320,90 @@ function showDetails() {
         alert(`You got a 70% discount on ${realPrice.textContent}!`);
     }
 };
+
+// Save data and go to payment page
+btnSave.addEventListener("click", showPayment);
+
+function showPayment() {
+    var block = document.getElementById('block');
+    var roomsQtd = document.getElementById('rooms').value
+    
+
+    alert(`Your reservation for the room ${roomSummary.textContent} has been saved!`)
+
+    block.innerHTML = "";
+
+    block.innerHTML += `<div class="container">
+    <h1>${roomSummary.textContent}</h1>
+    <div class="row">
+    
+        <div class="col-xs-12 col-md-12">
+        <h3 class="active"> Number of rooms: ${roomsQtd}</h3>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Payment Details
+                    </h3>
+                    <div class="checkbox pull-right">
+                        <label>
+                            <input type="checkbox" />
+                            Remember
+                        </label>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <form role="form">
+                    <div class="form-group col-xs-12 col-md-12">
+                        <label for="cardNumber">
+                            CARD NUMBER</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="cardNumber" placeholder="Valid Card Number"
+                                required autofocus />
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12">
+                            <div class="form-group">
+                                <label for="expityMonth">
+                                    EXPIRY DATE</label>
+                                <div class="col-xs-6 col-lg-6 pl-ziro">
+                                    <input type="text" class="form-control" id="expityMonth" placeholder="MM" required />
+                                </div>
+                                <div class="col-xs-6 col-lg-6 pl-ziro">
+                                    <input type="text" class="form-control" id="expityYear" placeholder="YY" required /></div>
+                            </div>
+                        </div>
+                        <div class="col-xs-5 col-md-5 pull-right">
+                            <div class="form-group">
+                                <label for="cvCode">
+                                    CV CODE</label>
+                                <input type="password" class="form-control" id="cvCode" placeholder="CV" required />
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a><span class="badge pull-right"><span class="glyphicon glyphicon-eur"></span>${priceSummary.textContent}</span> Final Payment</a>
+                </li>
+            </ul>
+            <br/>
+            <a id="btnPay" href="../index.php" class="btn btn-success btn-lg btn-block" role="button">Pay</a>
+        </div>
+    </div>
+</div>` 
+ 
+var btnPay = block.lastElementChild.lastElementChild.lastElementChild.lastElementChild;
+btnPay.addEventListener("click", payMsg);
+
+function payMsg() {
+    alert("Your purchase was successful!!! Thanks for trusting us!");
+}
+};
+
+
+
+
 
