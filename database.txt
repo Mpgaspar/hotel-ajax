@@ -1,0 +1,47 @@
+What would your database be like in a real environment?
+
+For the management of the rooms, I would use a relational database, e.g., mySQL or PostgreSQL.
+It should have at least 4 tables that would have to relate with each other:
+- Users
+- Booking
+- Rooms
+- Bills
+
+Users table:
+-> user_id (PK NN AI int)
+-> name (varchar)
+-> surname (varchar)
+-> email (varchar)
+-> isAdmin (bool)
+
+Booking table:
+-> form_id (PK NN AI int)
+-> checkIn (int)
+-> checkOut (int)
+-> peolple (int)
+-> user_id (FK)
+
+Rooms table:
+-> roomNum (PK NN int)
+-> people (int)
+-> size (int)
+-> isAvailable (bool)
+
+Bills table:
+-> bill_id (PK NN AI int)
+-> price (int)
+-> roomNum (FK)
+-> user_id (FK)
+
+PK = Primary Key
+FK = Foreign Key
+NN = NOT NULL
+AI = AUTO_INCREMENT
+
+The purpose of the database design is to organize and show the data in a simple and objective way.
+Certainly a database for hotel management is larger and more complex than this one, but the more structured
+and organized the database design is, the more we would avoid future problems.
+
+
+
+

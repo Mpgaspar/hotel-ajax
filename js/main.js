@@ -270,7 +270,7 @@ window.onload = function showRooms() {
                   <p id="description" class="form-group">Please choose another date.</p>
               </div>
           </div>`
-          
+
          summary.classList.add('hidden');
         }
       }
@@ -353,28 +353,28 @@ function showPayment() {
                 </div>
                 <div class="panel-body">
                     <form role="form">
-                    <div class="form-group col-xs-12 col-md-12">
+                    <div class="form-group row">
                         <label for="cardNumber">
                             CARD NUMBER</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="cardNumber" placeholder="Valid Card Number"
+                            <input  type="text" class="form-control" id="cardNumber" placeholder="Valid Card Number"
                                 required autofocus />
                             <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-12 col-md-12">
+                        <div >
                             <div class="form-group">
                                 <label for="expityMonth">
                                     EXPIRY DATE</label>
-                                <div class="col-xs-6 col-lg-6 pl-ziro">
+                                <div class="col-xs-12 col-lg-6 pl-ziro">
                                     <input type="text" class="form-control" id="expityMonth" placeholder="MM" required />
                                 </div>
-                                <div class="col-xs-6 col-lg-6 pl-ziro">
+                                <div class="col-xs-12 col-lg-6 pl-ziro">
                                     <input type="text" class="form-control" id="expityYear" placeholder="YY" required /></div>
                             </div>
                         </div>
-                        <div class="col-xs-5 col-md-5 pull-right">
+                        <div class="col-xs-6 col-md-6 pull-right">
                             <div class="form-group">
                                 <label for="cvCode">
                                     CV CODE</label>
@@ -390,7 +390,7 @@ function showPayment() {
                 </li>
             </ul>
             <br/>
-            <a id="btnPay" href="../index.php" class="btn btn-success btn-lg btn-block" role="button">Pay</a>
+            <a id="btnPay" href="../index.php" class="btn btn-success btn-lg btn-block" role="button">Pay Now</a>
         </div>
     </div>
 </div>` 
@@ -402,8 +402,3 @@ function payMsg() {
     alert("Your purchase was successful!!! Thanks for trusting us!");
 }
 };
-
-
-
-
-

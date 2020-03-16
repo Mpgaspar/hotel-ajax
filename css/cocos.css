@@ -5,3 +5,5 @@ body{font-family:Dosis,sans-serif}form,h1{font-family:Dosis}.navbar{background-c
 .panel-title {display: inline;font-weight: bold;}
 .checkbox.pull-right { margin: 0; }
 .pl-ziro { padding-left: 0px; }
+
+#cardNumber{width:300px;}
