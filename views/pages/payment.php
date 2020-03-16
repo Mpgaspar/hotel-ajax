@@ -1,1 +1,1 @@
-<h1>Payment page</h1>
+<!-- Views could be displayed dynamically using a template engine, e.g., blade or twig -->

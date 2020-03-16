@@ -1,0 +1,1 @@
+<!-- You could create a Class with a method to execute in a certain route, but it was not necessary in this project. -->

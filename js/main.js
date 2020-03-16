@@ -39,12 +39,13 @@ function getInputs() {
 window.onload = function showRooms() {    
   var content = document.getElementById("content");
   var xhttp = new XMLHttpRequest();
+  summary.classList.remove('hidden');
   
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       var myObj = JSON.parse(this.responseText);
       myObj.forEach(function(todo,i){
-      content.innerHTML += `<div class="col-md-8">
+      content.innerHTML += `
           <div id="card" class="card clearfix pointer">
               <div class="room-image">
                   <img id="photo" src="${todo.photo}" width="100%" />
@@ -70,9 +71,8 @@ window.onload = function showRooms() {
                       </div>    
                   </div>
                </div>
-          </div>
-      </div>`
-
+          </div>`
+      
       // Change summary and active card when select a room
       var card = document.querySelectorAll(".card");
 
@@ -119,7 +119,7 @@ window.onload = function showRooms() {
         
                 // JUST SIMPLE ROOM FOR 2 OR LESS ADULTS
                 if(adultsInpt <= "2" && adultsInpt != "") {
-                    content.innerHTML = `<div class="col-md-8">
+                    content.innerHTML = `
                     <div id="card" class="card clearfix pointer active">
                         <div class="room-image">
                             <img id="photo" src="${myObj[0].photo}" width="100%" />
@@ -145,8 +145,8 @@ window.onload = function showRooms() {
                                 </div>    
                             </div>
                          </div>
-                    </div>
-                </div>`
+                    </div>`
+
                   summary.classList.remove('hidden');
                   roomSummary.innerText = myObj[0].title;
                   priceSummary.innerText = myObj[0].price;
@@ -166,7 +166,7 @@ window.onload = function showRooms() {
 
         // THE BEST ROOM FOR MORE THAN 4 ADULTS
         if(adultsInpt >= "4") {
-        content.innerHTML = `<div class="col-md-8">
+        content.innerHTML = `
         <div id="card" class="card clearfix pointer active">
             <div class="room-image">
                 <img id="photo" src="${myObj[2].photo}" width="100%" />
@@ -192,8 +192,8 @@ window.onload = function showRooms() {
                     </div>    
                 </div>
              </div>
-        </div>
-    </div>` 
+        </div>`
+
         summary.classList.remove('hidden');
         roomSummary.innerText = myObj[2].title;
         priceSummary.innerText = myObj[2].price;
@@ -212,7 +212,7 @@ window.onload = function showRooms() {
         
         // JUST BUNGALOW AVAILABLE FOR 3 ADULTS
         if(adultsInpt == "3" && adultsInpt != "") {
-          content.innerHTML = `<div class="col-md-8">
+          content.innerHTML = `
           <div id="card" class="card clearfix pointer active">
               <div class="room-image">
                   <img id="photo" src="${myObj[1].photo}" width="100%" />
@@ -238,8 +238,8 @@ window.onload = function showRooms() {
                       </div>    
                   </div>
                </div>
-          </div>
-      </div>`
+          </div>`
+
         summary.classList.remove('hidden');
         priceSummary.innerText = myObj[1].price;
         roomSummary.innerText = myObj[1].title;
@@ -259,7 +259,7 @@ window.onload = function showRooms() {
         // NO ROOMS AVAILABLE IN APRIL
         if(month == "04") {
           alert('No more rooms!')
-          content.innerHTML = `<div class="col-md-8">
+          content.innerHTML = `
           <div id="card" class="card clearfix pointer active">
               <div class="room-image">
                   <img id="photo" src="images/cocos/norooms.png" width="100%" />
@@ -269,8 +269,8 @@ window.onload = function showRooms() {
                   <h5 id="room" class="form-group">No rooms available!</h5>
                   <p id="description" class="form-group">Please choose another date.</p>
               </div>
-          </div>
-      </div>`
+          </div>`
+          
          summary.classList.add('hidden');
         }
       }

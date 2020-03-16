@@ -146,7 +146,7 @@
 
         <!-- Dynamically show rooms via JavaScript and Ajax  -->
         <div class="row">
-        <div id="content"></div>
+        <div id="content" class="col-md-8"></div>
 
 
             <!-- <div class="col-md-8 main"> -->
@@ -242,7 +242,7 @@
 
             <!-- SIDEBAR -->
             <div class="col-md-4 sidebar">
-                <div id="summary" class="card">
+                <div id="summary" class="card hidden">
                     <h2>Reservation Summary</h2>
                     <div class="clearfix">
                         <h5 id="room-summary" class="pull-left">Mini Dreamy Room</h5>
